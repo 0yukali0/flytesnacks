@@ -31,7 +31,7 @@ custom_image = ImageSpec(
 )
 
 import ray
-from flytekitplugins.ray import HeadNodeConfig, RayJobConfig, WorkerNodeConfig
+from flytekitplugins.ray import HeadNodeConfig, RayJobConfig, WorkerNodeConfig, AutoscalerOptionsConfig
 
 
 # %% [markdown]
@@ -65,6 +65,13 @@ ray_config = RayJobConfig(
     worker_node_config=[WorkerNodeConfig(group_name="ray-group", replicas=1)],
     runtime_env={"pip": ["numpy", "pandas"]},  # or runtime_env="./requirements.txt"
     enable_autoscaling=True,
+    autoscaler_options=AutoscalerOptionsConfig(
+        upscaling_mode="Conservative",
+        idle_timeout_seconds=120,
+        image="rayproject/ray:2.9.0",
+        env={"demo": "hello"},
+        resources=Resources(cpu=("1", "2"), mem="2Gi"),
+    ),
     shutdown_after_job_finishes=True,
     ttl_seconds_after_finished=3600,
 )
