@@ -62,7 +62,7 @@ def f(x):
 # %%
 ray_config = RayJobConfig(
     head_node_config=HeadNodeConfig(ray_start_params={"log-color": "True"}),
-    worker_node_config=[WorkerNodeConfig(group_name="ray-group", replicas=1, resources=Resources(cpu=("2", "3"), mem="2Gi"))],
+    worker_node_config=[WorkerNodeConfig(group_name="ray-group", replicas=1)],
     runtime_env={"pip": ["numpy", "pandas"]},  # or runtime_env="./requirements.txt"
     enable_autoscaling=True,
     autoscaler_options=AutoscalerOptionsConfig(
