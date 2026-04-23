@@ -66,7 +66,7 @@ ray_config = RayJobConfig(
     runtime_env={"pip": ["numpy", "pandas"]},  # or runtime_env="./requirements.txt"
     enable_autoscaling=True,
     autoscaler_options=AutoscalerOptionsConfig(
-        upscaling_mode="Conservative",
+        upscaling_mode=AutoscalerOptionsConfig.UpscalingMode.CONSERVATIVE,
         idle_timeout_seconds=120,
         image="rayproject/ray:2.9.0",
         env={"demo": "hello"},
